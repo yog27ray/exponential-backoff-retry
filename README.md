@@ -2,6 +2,7 @@
 
 It is simple exponential backoff retry algorithm implementation.
 
+
 ## Getting Started
 
 1. Execute function 'functionToExecuteInBackoffRetry' with exponential retry.
