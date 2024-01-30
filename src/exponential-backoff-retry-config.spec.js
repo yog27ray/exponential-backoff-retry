@@ -6,30 +6,30 @@ describe('ExponentialBackOffRetryConfig', () => {
     context('execution of config object with maxAttempt provided', () => {
         it('should update correctly', async () => {
             const exponentialBackoffRetryConfig = new exponential_backoff_retry_config_1.ExponentialBackoffRetryConfig();
-            chai_1.expect(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(0);
-            chai_1.expect(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(0);
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
             exponentialBackoffRetryConfig.incrementAttempt();
-            chai_1.expect(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(2000);
-            chai_1.expect(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(2000);
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
             exponentialBackoffRetryConfig.incrementAttempt();
-            chai_1.expect(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(4000);
-            chai_1.expect(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(4000);
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
             exponentialBackoffRetryConfig.incrementAttempt();
-            chai_1.expect(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(8000);
-            chai_1.expect(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.false;
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(8000);
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.false;
         });
     });
     context('execution of config object without maxAttempt provided', () => {
         it('should update correctly', async () => {
             const exponentialBackoffRetryConfig = new exponential_backoff_retry_config_1.ExponentialBackoffRetryConfig(2);
-            chai_1.expect(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(0);
-            chai_1.expect(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(0);
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
             exponentialBackoffRetryConfig.incrementAttempt();
-            chai_1.expect(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(2000);
-            chai_1.expect(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(2000);
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.true;
             exponentialBackoffRetryConfig.incrementAttempt();
-            chai_1.expect(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(4000);
-            chai_1.expect(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.false;
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.getWaitingTime()).to.equal(4000);
+            (0, chai_1.expect)(exponentialBackoffRetryConfig.isNextAttemptAllowed()).to.be.false;
         });
     });
 });

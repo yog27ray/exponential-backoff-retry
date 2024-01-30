@@ -1,31 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.exponentialBackoffRetry = void 0;
 const exponential_backoff_retry_config_1 = require("./exponential-backoff-retry-config");
-class ExponentialBackoffRetry {
-    static exponentialBackoffRetry(executionFunction, exponentialRetryConfig = new exponential_backoff_retry_config_1.ExponentialBackoffRetryConfig()) {
-        const waitingTime = exponentialRetryConfig.getWaitingTime();
-        return new Promise((resolve, reject) => {
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            setTimeout(() => {
-                ExponentialBackoffRetry.executeFunction(executionFunction, exponentialRetryConfig)
-                    .then(resolve)
-                    .catch(reject);
-            }, waitingTime);
-        });
+function wait(timeout) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, timeout);
+    });
+}
+async function exponentialBackoffRetry(executionFunction, exponentialRetryConfig = new exponential_backoff_retry_config_1.ExponentialBackoffRetryConfig()) {
+    try {
+        return await executionFunction();
     }
-    static async executeFunction(executionFunction, exponentialRetryConfig = new exponential_backoff_retry_config_1.ExponentialBackoffRetryConfig()) {
-        try {
-            return await executionFunction();
+    catch (error) {
+        if (!exponentialRetryConfig.isNextAttemptAllowed()) {
+            return Promise.reject(error);
         }
-        catch (error) {
-            if (!exponentialRetryConfig.isNextAttemptAllowed()) {
-                return Promise.reject(error);
-            }
-            exponentialRetryConfig.incrementAttempt();
-            return ExponentialBackoffRetry.exponentialBackoffRetry(executionFunction, exponentialRetryConfig);
-        }
+        exponentialRetryConfig.incrementAttempt();
+        const waitingTime = exponentialRetryConfig.getWaitingTime();
+        await wait(waitingTime);
+        return exponentialBackoffRetry(executionFunction, exponentialRetryConfig);
     }
 }
-const { exponentialBackoffRetry } = ExponentialBackoffRetry;
 exports.exponentialBackoffRetry = exponentialBackoffRetry;
 //# sourceMappingURL=exponential-backoff-retry.js.map

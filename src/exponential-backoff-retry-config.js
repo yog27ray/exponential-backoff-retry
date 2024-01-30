@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExponentialBackoffRetryConfig = void 0;
 class ExponentialBackoffRetryConfig {
     constructor(maxAttempt = 3) {
         this._currentAttempt = 0;

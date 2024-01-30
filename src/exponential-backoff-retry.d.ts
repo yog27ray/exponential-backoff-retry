@@ -1,7 +1,3 @@
 import { ExponentialBackoffRetryConfig } from './exponential-backoff-retry-config';
-declare class ExponentialBackoffRetry {
-    static exponentialBackoffRetry(executionFunction: () => Promise<any>, exponentialRetryConfig?: ExponentialBackoffRetryConfig): Promise<any>;
-    private static executeFunction;
-}
-declare const exponentialBackoffRetry: typeof ExponentialBackoffRetry.exponentialBackoffRetry;
+declare function exponentialBackoffRetry<T>(executionFunction: () => Promise<T>, exponentialRetryConfig?: ExponentialBackoffRetryConfig): Promise<T>;
 export { exponentialBackoffRetry };

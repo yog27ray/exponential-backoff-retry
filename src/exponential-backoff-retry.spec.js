@@ -15,17 +15,17 @@ describe('ExponentialBackOffRetry', () => {
         }
         it('should return result on second attempt', async () => {
             retryCount = 0;
-            const result = await exponential_backoff_retry_1.exponentialBackoffRetry(() => testExecutionFunction(), new exponential_backoff_retry_config_1.ExponentialBackoffRetryConfig());
-            chai_1.expect(result).to.deep.equal({ retryCount: 2 });
+            const result = await (0, exponential_backoff_retry_1.exponentialBackoffRetry)(() => testExecutionFunction(), new exponential_backoff_retry_config_1.ExponentialBackoffRetryConfig());
+            (0, chai_1.expect)(result).to.deep.equal({ retryCount: 2 });
         });
         it('should return error when maxAttempt is reached and error occurred', async () => {
             retryCount = 0;
             try {
-                await exponential_backoff_retry_1.exponentialBackoffRetry(() => testExecutionFunction(), new exponential_backoff_retry_config_1.ExponentialBackoffRetryConfig(1));
+                await (0, exponential_backoff_retry_1.exponentialBackoffRetry)(() => testExecutionFunction(), new exponential_backoff_retry_config_1.ExponentialBackoffRetryConfig(1));
                 await Promise.reject({ code: 99, messsage: 'should not reach here.' });
             }
             catch (error) {
-                chai_1.expect(error.message).to.equals('Unauthorised user');
+                (0, chai_1.expect)(error.message).to.equals('Unauthorised user');
             }
         });
     });
