@@ -5,7 +5,7 @@ import { ExponentialBackoffRetryConfig } from './exponential-backoff-retry-confi
 describe('ExponentialBackOffRetry', () => {
   context('execution of exponentialRetry', () => {
     let retryCount: number = 0;
-    function testExecutionFunction(): Promise<any> {
+    function testExecutionFunction(): Promise<{ retryCount: number }> {
       if (retryCount === 2) {
         return Promise.resolve({ retryCount });
       }
@@ -25,7 +25,7 @@ describe('ExponentialBackOffRetry', () => {
         await exponentialBackoffRetry(() => testExecutionFunction(), new ExponentialBackoffRetryConfig(1));
         await Promise.reject({ code: 99, messsage: 'should not reach here.' });
       } catch (error) {
-        expect(error.message).to.equals('Unauthorised user');
+        expect((error as { message: string; }).message).to.equals('Unauthorised user');
       }
     });
   });
